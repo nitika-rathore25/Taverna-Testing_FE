@@ -1,0 +1,45 @@
+<app-header (reset)="onReset()"></app-header>
+
+<!-- Info section -->
+<div class="p-6 rounded-lg shadow text-blue-900 bg-primary-gradient relative overflow-hidden">
+    <div class="absolute inset-0 bg-white opacity-30 pointer-events-none"></div>
+
+    <div class="relative z-10">
+        <h2 class="text-xl font-semibold mb-2">How to check if a VIN is junk:</h2>
+
+        <ul class="list-decimal list-inside space-y-1 mb-2 flex items-center">
+            <li>Enter VIN in the input fields below.</li>
+            <p class="font-bold mx-4 select-none">OR</p>
+            <li>Upload a PDF file containing VIN details.</li>
+        </ul>
+
+        <p class="mb-1">
+            To compare these VIN check results with previous ones, upload an Excel data file below.
+        </p>
+    </div>
+</div>
+
+
+<!-- Common Excel Upload + Reset -->
+<div class="flex items-center gap-4  p-4 bg-gray-100 rounded-md">
+    <input type="file" #excelInput accept=".xlsx, .xls" (change)="onExcelFileSelected($event)"
+        class="border border-gray-300 rounded p-2 cursor-pointer" />
+    <button (click)="resetExcel()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
+        Reset Excel File
+    </button>
+    <button (click)="onReset()" title="reset carfax and manheim entered details"
+        class="text-white bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd transition px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+        Reset All
+    </button>
+</div>
+
+<!-- VIN check panels -->
+<div class="flex flex-col md:flex-row h-[calc(100vh-310px)]">
+    <section class="w-full md:w-1/2 overflow-auto p-2">
+        <app-carfax></app-carfax>
+    </section>
+
+    <section class="w-full md:w-1/2 overflow-auto p-2 border-l border-gray-200">
+        <app-manheim></app-manheim>
+    </section>
+</div>
