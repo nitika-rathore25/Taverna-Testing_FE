@@ -12,7 +12,8 @@
 
     <!-- VIN Input -->
     <label for="vin-manheim" class="mb-2 font-semibold text-blue-700">Enter VIN</label>
-    <input id="vin-manheim" [(ngModel)]="vin" placeholder="Enter VIN..." [disabled]="pdfFile !== null"
+    <input id="vin-manheim" [(ngModel)]="vin" (keydown.enter)="submitVIN()" placeholder="Enter VIN..."
+        [disabled]="pdfFile !== null"
         class="border border-blue-300 rounded-md p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-primaryGradientEnd disabled:bg-gray-100" />
 
     <!-- Validation Message -->
