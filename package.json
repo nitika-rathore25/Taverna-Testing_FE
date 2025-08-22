@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build:dev": "ng build --configuration=dev --base-href /taverna-testing-platform/ --output-hashing=all --aot",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:taverna-testing-FE": "node dist/taverna-testing-fe/server/server.mjs"
