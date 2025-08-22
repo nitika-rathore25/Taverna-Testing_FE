@@ -22,8 +22,12 @@
 
 <!-- Common Excel Upload + Reset -->
 <div class="flex items-center gap-4  p-4 bg-gray-100 rounded-md">
-    <input type="file" #excelInput accept=".xlsx, .xls" (change)="onExcelFileSelected($event)"
-        class="border border-gray-300 rounded p-2 cursor-pointer" />
+    <div class="flex items-center space-x-2">
+        <span>Choose Excel File</span>
+        <span class="text-primaryGradientStart font-bold text-xl select-none">→</span>
+        <input type="file" #excelInput accept=".xlsx, .xls" (change)="onExcelFileSelected($event)"
+            class="border border-gray-300 rounded p-2 cursor-pointer" />
+    </div>
     <button (click)="resetExcel()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
         Reset Excel File
     </button>
@@ -31,15 +35,21 @@
         class="text-white bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd transition px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
         Reset All
     </button>
+    <div *ngIf="showFinalResultButton">
+        <button (click)="onFinalResultClick()"
+            class="text-white bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd transition px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            Final Result
+        </button>
+    </div>
 </div>
 
 <!-- VIN check panels -->
 <div class="flex flex-col md:flex-row h-[calc(100vh-310px)]">
     <section class="w-full md:w-1/2 overflow-auto p-2">
-        <app-carfax></app-carfax>
+        <app-carfax (responseChange)="updateCarfaxResponse($event)"></app-carfax>
     </section>
 
     <section class="w-full md:w-1/2 overflow-auto p-2 border-l border-gray-200">
-        <app-manheim></app-manheim>
+        <app-manheim (responseChange)="updateManheimResponse($event)"></app-manheim>
     </section>
 </div>

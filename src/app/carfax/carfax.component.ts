@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -23,6 +23,7 @@ export class CarfaxComponent {
   validationMessage: string | null = null;
 
   @ViewChild('pdfInput') pdfInputRef!: ElementRef<HTMLInputElement>;
+  @Output() responseChange = new EventEmitter<any>();
 
   objectKeys = Object.keys;
 
@@ -54,6 +55,7 @@ export class CarfaxComponent {
         .subscribe((data) => {
           if (data) {
             this.response = data;
+            this.responseChange.emit(this.response);
             this.loading = false;
             this.toastr.info(`PDF file "${file.name}" uploaded successfully. VIN input disabled.`);
           }
@@ -95,6 +97,7 @@ export class CarfaxComponent {
       )
       .subscribe((data) => {
         this.response = data;
+        this.responseChange.emit(this.response);
         this.loading = false;
       });
   }
