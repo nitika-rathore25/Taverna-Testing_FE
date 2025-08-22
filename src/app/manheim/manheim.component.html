@@ -1,6 +1,6 @@
 <div class="bg-white rounded-lg shadow-md w-full h-full flex flex-col p-2">
     <h2
-        class="text-blue-900 text-2xl font-semibold mb-5 bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd bg-clip-text text-transparent">
+        class="text-blue-900 text-2xl font-semibold mb-4 bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd bg-clip-text text-transparent">
         Manheim
     </h2>
 
@@ -12,22 +12,28 @@
 
     <!-- VIN Input -->
     <label for="vin-manheim" class="mb-2 font-semibold text-blue-700">Enter VIN</label>
-    <input id="vin-manheim" [(ngModel)]="vin" (keydown.enter)="submitVIN()" placeholder="Enter VIN..."
-        [disabled]="pdfFile !== null"
-        class="border border-blue-300 rounded-md p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-primaryGradientEnd disabled:bg-gray-100" />
+    <!-- VIN Input with Submit Button inside -->
+    <div class="relative mb-4">
+        <input id="vin-manheim" [(ngModel)]="vin" (keydown.enter)="submitVIN()" placeholder="Enter VIN..."
+            [disabled]="pdfFile !== null"
+            class="border border-blue-300 rounded-md p-2 pr-24 w-full focus:outline-none focus:ring-2 focus:ring-primaryGradientEnd disabled:bg-gray-100" />
+
+        <button (click)="submitVIN()" [disabled]="loading || pdfFile !== null"
+            class="absolute right-1 top-1 bottom-1 flex items-center gap-1 bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd text-white px-3 rounded-md font-semibold shadow-md hover:from-primaryGradientEnd hover:to-primaryGradientStart disabled:bg-blue-200 disabled:cursor-not-allowed text-sm">
+            <span>Submit</span>
+            <!-- Paper plane icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9-7-9-7v4H3v6h9v4z" />
+            </svg>
+        </button>
+    </div>
 
     <!-- Validation Message -->
     <div *ngIf="validationMessage" class="text-red-600 font-semibold mb-4">
         {{ validationMessage }}
     </div>
 
-    <!-- Submit Button -->
-    <div class="flex justify-center mb-4">
-        <button (click)="submitVIN()" [disabled]="loading || pdfFile !== null"
-            class="bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd text-white py-2 px-6 rounded-md font-semibold hover:from-primaryGradientEnd hover:to-primaryGradientStart disabled:bg-blue-200 disabled:cursor-not-allowed">
-            Submit
-        </button>
-    </div>
 
 
     <div *ngIf="loading" class="text-blue-600 font-semibold mb-2 flex items-center text-lg select-none">

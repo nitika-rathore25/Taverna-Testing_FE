@@ -1,130 +1,158 @@
 <app-header (reset)="onReset()"></app-header>
 
 <!-- Info section -->
-<div class="p-6 rounded-lg shadow text-blue-900 bg-primary-gradient relative overflow-hidden">
-    <div class="absolute inset-0 bg-white opacity-30 pointer-events-none"></div>
+<div
+    class="p-6 rounded-2xl shadow-xl text-blue-900 bg-gradient-to-r from-blue-100 via-pink-50 to-yellow-100 relative overflow-hidden animate-fadeIn">
+    <div class="absolute inset-0 bg-white opacity-20 blur-lg pointer-events-none"></div>
 
     <div class="relative z-10">
-        <h2 class="text-xl font-semibold mb-2">How to check if a VIN is junk:</h2>
+        <h2 class="text-2xl font-extrabold mb-4 drop-shadow-sm animate-slideDown">
+            🚗 How to check if a VIN is junk:
+        </h2>
 
-        <ul class="list-decimal list-inside space-y-1 mb-2 flex items-center">
-            <li>Enter VIN in the input fields below.</li>
-            <p class="font-bold mx-4 select-none">OR</p>
-            <li>Upload a PDF file containing VIN details.</li>
+        <ul class="list-decimal list-inside space-y-2 mb-2 flex items-center animate-fadeIn delay-200">
+            <li class="hover:translate-x-1 transition-transform">Enter VIN in the input fields below.</li>
+            <p class="font-bold mx-4 select-none text-pink-600 animate-pulse">OR</p>
+            <li class="hover:translate-x-1 transition-transform">Upload a PDF file containing VIN details.</li>
         </ul>
 
-        <p class="mb-1">
+        <p class="mb-1 italic text-gray-800 animate-fadeIn delay-300">
             To compare these VIN check results with previous ones, upload an Excel data file below.
         </p>
     </div>
 </div>
 
-
 <!-- Common Excel Upload + Reset -->
-<div class="flex items-center gap-4  p-4 bg-gray-100 rounded-md">
+<div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-lg border border-gray-200 animate-fadeIn delay-500">
     <div class="flex items-center space-x-2">
-        <span>Choose Excel File</span>
-        <span class="text-primaryGradientStart font-bold text-xl select-none">→</span>
+        <span class="font-semibold text-gray-700">Choose Excel File</span>
+        <span class="text-primaryGradientStart font-bold text-2xl select-none animate-bounce">→</span>
         <input type="file" #excelInput accept=".xlsx, .xls" (change)="onExcelFileSelected($event)"
-            class="border border-gray-300 rounded p-2 cursor-pointer" />
+            class="border border-gray-300 rounded-lg p-2 cursor-pointer shadow-sm hover:shadow-md transition" />
     </div>
-    <button (click)="resetExcel()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
+    <!-- Reset Excel File -->
+    <button (click)="resetExcel()"
+        class="px-4 py-2 bg-gradient-to-r from-red-500 to-red-700 text-white rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition flex items-center gap-2">
+        <!-- File/refresh icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M4 4v6h6M20 20v-6h-6M4 10a8 8 0 0116 0M20 14a8 8 0 01-16 0" />
+        </svg>
         Reset Excel File
     </button>
+
+    <!-- Reset All -->
     <button (click)="onReset()" title="reset carfax and manheim entered details"
-        class="text-white bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd transition px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+        class="text-white bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd transition px-4 py-2 rounded-lg shadow-md hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center gap-2">
+        <!-- Refresh/undo icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M4 4v6h6M20 20v-6h-6M4 10a8 8 0 0116 0M20 14a8 8 0 01-16 0" />
+        </svg>
         Reset All
     </button>
+    <!-- Final Result -->
     <div *ngIf="showFinalResultButton">
         <button (click)="onFinalResultClick()"
-            class=" text-white bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd transition px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            class="text-white bg-gradient-to-r from-green-400 to-green-600 transition px-4 py-2 rounded-lg shadow-md hover:shadow-xl hover:scale-105 flex items-center gap-2">
+            <!-- Check icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
             Final Result
         </button>
     </div>
+
 </div>
 
 <!-- VIN check panels -->
-<div class="flex flex-col md:flex-row h-[calc(100vh-310px)]">
-    <section class="w-full md:w-1/2 overflow-auto p-2">
+<div class="flex flex-col md:flex-row gap-4 mt-2 animate-fadeIn delay-700 min-h-[calc(100vh-310px)]">
+    <section
+        class="w-full md:w-1/2 p-4 bg-white rounded-xl shadow-lg hover:shadow-2xl transition border border-gray-100 flex-1">
         <app-carfax (responseChange)="updateCarfaxResponse($event)"></app-carfax>
     </section>
 
-    <section class="w-full md:w-1/2 overflow-auto p-2 border-l border-gray-200">
+    <section
+        class="w-full md:w-1/2 p-4 bg-white rounded-xl shadow-lg hover:shadow-2xl transition border border-gray-100 flex-1">
         <app-manheim (responseChange)="updateManheimResponse($event)"></app-manheim>
     </section>
 </div>
 
 
-
-
 <!-- Modal for Results -->
-<div *ngIf="showModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-xl relative">
+<div *ngIf="showModal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 animate-fadeIn">
+    <div
+        class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-xl relative transform transition-all scale-95 animate-scaleUp">
         <!-- Close icon -->
-        <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-xl" (click)="closeModal()"
-            aria-label="Close modal">
+        <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-2xl hover:rotate-90 transition"
+            (click)="closeModal()" aria-label="Close modal">
             &times;
         </button>
 
         <!-- Final Result header and success/error status -->
         <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold">Final Result</h2>
-
-            <div *ngIf="isJunkClassifierMatch; else notMatched"
-                class="flex items-center space-x-2 text-green-600 font-semibold">
-                <span
-                    class="flex items-center justify-center w-6 h-6 rounded-full bg-green-600 text-white text-sm select-none">
-                    &#10003; <!-- checkmark -->
-                </span>
-                <span>Success: Status matched</span>
-            </div>
-
-            <ng-template #notMatched>
-                <div class="flex items-center space-x-2 text-red-600 font-semibold">
+            <h2 class="text-2xl font-bold text-gray-800 drop-shadow">Final Result</h2>
+            <ng-container *ngIf="!vinNotInExcel">
+                <div *ngIf="isJunkClassifierMatch; else notMatched"
+                    class="flex items-center space-x-2 text-green-600 font-semibold animate-fadeIn delay-300">
                     <span
-                        class="flex items-center justify-center w-5 h-5 rounded-full bg-red-600 text-white select-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M18.364 5.636l-12.728 12.728M5.636 5.636l12.728 12.728" />
-                        </svg>
+                        class="flex items-center justify-center w-8 h-8 rounded-full bg-green-600 text-white text-lg shadow-md select-none">
+                        &#10003;
                     </span>
-                    <span>Status not matched</span>
+                    <span>Success: Status matched</span>
                 </div>
-            </ng-template>
 
+                <ng-template #notMatched>
+                    <div class="flex items-center space-x-2 text-red-600 font-semibold animate-fadeIn delay-300">
+                        <span
+                            class="flex items-center justify-center w-7 h-7 rounded-full bg-red-600 text-white shadow-md select-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M18.364 5.636l-12.728 12.728M5.636 5.636l12.728 12.728" />
+                            </svg>
+                        </span>
+                        <span>Status not matched</span>
+                    </div>
+                </ng-template>
+            </ng-container>
         </div>
 
         <!-- Show error message if VIN not in Excel -->
-        <div *ngIf="vinNotInExcel" class="my-8 text-center">
+        <div *ngIf="vinNotInExcel" class="my-8 text-center animate-pulse">
             <span class="text-red-600 text-lg font-semibold">
-                Provided VIN is not present in the file
+                ❌ Provided VIN is not present in the file
             </span>
         </div>
 
         <!-- Show results if VIN is present -->
         <ng-container *ngIf="!vinNotInExcel">
-            <table class="table-auto w-full text-center mb-4">
+            <table
+                class="table-auto w-full text-center mb-6 shadow-md rounded-lg overflow-hidden animate-fadeIn delay-500">
                 <thead>
-                    <tr class="bg-gray-100">
-                        <th>Carfax Status</th>
-                        <th>Manheim Status</th>
-                        <th>Final Result</th>
+                    <tr class="bg-gradient-to-r from-blue-200 to-blue-100">
+                        <th class="p-2">Carfax Status</th>
+                        <th class="p-2">Manheim Status</th>
+                        <th class="p-2">Final Result</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr class="hover:bg-gray-50 transition">
                         <td>{{ modalCarfaxStatus }}</td>
                         <td>{{ modalManheimStatus }}</td>
-                        <td>{{ modalResult }}</td>
+                        <td class="font-bold text-blue-700">{{ modalResult }}</td>
                     </tr>
                 </tbody>
             </table>
 
             <div *ngIf="junkClassifierStatus !== null && junkClassifierStatus !== ''"
-                class="mt-6 pt-4 border-t border-gray-200 flex flex-col items-center space-y-2 text-center">
+                class="mt-6 pt-4 border-t border-gray-200 flex flex-col items-center space-y-2 text-center animate-fadeIn delay-700">
                 <span class="text-lg font-semibold">Junk Classifier Status from Uploaded Excel File:</span>
-                <span class="text-xl font-bold text-blue-700">{{ junkClassifierStatus }}</span>
+                <span class="text-2xl font-bold text-pink-600 drop-shadow">{{ junkClassifierStatus }}</span>
             </div>
         </ng-container>
     </div>
