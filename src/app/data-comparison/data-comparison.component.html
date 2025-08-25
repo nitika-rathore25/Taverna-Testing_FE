@@ -43,6 +43,15 @@
         Reset All
     </button>
 
+
+</div>
+
+<!-- Manual VIN Input (Fallback when Carfax/Manheim VIN missing) -->
+<div
+    class="flex items-center gap-4 mt-2 p-4 bg-white rounded-xl shadow-lg border border-gray-200 animate-fadeIn delay-700">
+    <label for="manualVin" class="font-semibold text-gray-700">Enter VIN (in case of upload pdf):</label>
+    <input id="manualVin" type="text" [(ngModel)]="manualVin" placeholder="Enter VIN here"
+        class="border border-gray-300 rounded-lg p-2 w-60 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none" />
     <!-- Final Result -->
     <div>
         <button (click)="onFinalResultClick()"
@@ -55,14 +64,6 @@
             Final Result
         </button>
     </div>
-</div>
-
-<!-- Manual VIN Input (Fallback when Carfax/Manheim VIN missing) -->
-<div
-    class="flex items-center gap-4 mt-2 p-4 bg-white rounded-xl shadow-lg border border-gray-200 animate-fadeIn delay-700">
-    <label for="manualVin" class="font-semibold text-gray-700">Enter VIN (in case of upload pdf):</label>
-    <input id="manualVin" type="text" [(ngModel)]="manualVin" placeholder="Enter VIN here"
-        class="border border-gray-300 rounded-lg p-2 w-60 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none" />
 </div>
 
 <!-- VIN check panels -->
@@ -90,10 +91,11 @@
             &times;
         </button>
 
-        <!-- Final Result header and success/error status -->
+        <!-- Final Result header -->
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800 drop-shadow">Final Result</h2>
-            <ng-container *ngIf="!vinNotInExcel && (junkClassifierStatus !== null && junkClassifierStatus !== '')">
+            <ng-container
+                *ngIf="!vinMismatch && !vinNotInExcel && (junkClassifierStatus !== null && junkClassifierStatus !== '')">
                 <div *ngIf="isJunkClassifierMatch; else notMatched"
                     class="flex items-center space-x-2 text-green-600 font-semibold animate-fadeIn delay-300">
                     <span
@@ -119,25 +121,30 @@
             </ng-container>
         </div>
 
-        <!-- Show error message if VIN not in Excel -->
+        <!-- VIN Mismatch Message -->
+        <div *ngIf="vinMismatch" class="my-8 text-center animate-pulse">
+            <span class="text-red-600 text-lg font-semibold">
+                ❌ Both VINs are different. Cannot compare with Excel.
+            </span>
+        </div>
+
         <!-- VIN Missing Message -->
-        <div *ngIf="vinUnavailable" class="my-8 text-center animate-pulse">
+        <div *ngIf="vinUnavailable && !vinMismatch" class="my-8 text-center animate-pulse">
             <span class="text-red-600 text-lg font-semibold">
                 ❌ VIN not available for comparison, please enter VIN.
             </span>
         </div>
 
-        <!-- Existing VIN not in Excel error -->
-        <div *ngIf="!vinUnavailable && vinNotInExcel && showFinalResultButton" class="my-8 text-center animate-pulse">
+        <!-- VIN not in Excel Message -->
+        <div *ngIf="!vinUnavailable && !vinMismatch && vinNotInExcel && showFinalResultButton"
+            class="my-8 text-center animate-pulse">
             <span class="text-red-600 text-lg font-semibold">
                 ❌ Provided VIN is not present in the file
             </span>
         </div>
 
-
-
-        <!-- Show results if VIN is present -->
-        <ng-container>
+        <!-- Result Table + Junk Classifier (only if no mismatch and VIN available) -->
+        <ng-container *ngIf=" !vinUnavailable">
             <table
                 class="table-auto w-full text-center mb-6 shadow-md rounded-lg overflow-hidden animate-fadeIn delay-500">
                 <thead>
@@ -156,7 +163,7 @@
                 </tbody>
             </table>
 
-            <div *ngIf="junkClassifierStatus !== null && junkClassifierStatus !== ''"
+            <div *ngIf="!vinMismatch && junkClassifierStatus !== null && junkClassifierStatus !== ''"
                 class="mt-6 pt-4 border-t border-gray-200 flex flex-col items-center space-y-2 text-center animate-fadeIn delay-700">
                 <span class="text-lg font-semibold">Junk Classifier Status from Uploaded Excel File:</span>
                 <span class="text-2xl font-bold text-pink-600 drop-shadow">{{ junkClassifierStatus }}</span>

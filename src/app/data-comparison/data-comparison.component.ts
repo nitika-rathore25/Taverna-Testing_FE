@@ -35,6 +35,8 @@ export class DataComparisonComponent {
   junkClassifierStatus: string | null = null;
   vinNotInExcel = false;
   vinUnavailable = false; // new flag for missing VIN
+  vinMismatch = false;
+
 
 
   // Getter for junk classifier match (case-insensitive)
@@ -179,19 +181,33 @@ export class DataComparisonComponent {
 
     const finalResult = this.computeFinalResult(carfaxStatus, manheimStatus);
 
-    // Try to get VIN (Carfax → Manheim → Manual VIN fallback)
-    const lookupVin =
-      this.getVinFromResponse(this.carfaxResponse) ||
-      this.getVinFromResponse(this.manheimResponse) ||
-      (this.manualVin ? this.manualVin.trim().toUpperCase() : null);
+    const carfaxVin = this.getVinFromResponse(this.carfaxResponse);
+    const manheimVin = this.getVinFromResponse(this.manheimResponse);
 
-    // Check if VIN exists at all
-    this.vinUnavailable = !lookupVin;   // ✅ mark missing VIN case
+    // Detect VIN mismatch if both exist but not equal
+    this.vinMismatch = !!(carfaxVin && manheimVin && carfaxVin !== manheimVin);
 
-    // Lookup Excel junk classifier if VIN is available
-    const classifier = lookupVin ? this.getJunkClassifierStatus(lookupVin) : null;
+    // If mismatch, skip classifier lookup
+    let lookupVin: string | null = null;
+    if (!this.vinMismatch) {
+      lookupVin =
+        carfaxVin ||
+        manheimVin ||
+        (this.manualVin ? this.manualVin.trim().toUpperCase() : null);
+    }
 
-    this.vinNotInExcel = !this.vinUnavailable && (!this.excelData.length || classifier === null || classifier === '');
+    // VIN unavailable flag (no vin at all, but only if not mismatch)
+    this.vinUnavailable = !this.vinMismatch && !lookupVin;
+
+    // Lookup Excel only if no mismatch
+    const classifier = !this.vinMismatch && lookupVin
+      ? this.getJunkClassifierStatus(lookupVin)
+      : null;
+
+    this.vinNotInExcel =
+      !this.vinMismatch &&
+      !this.vinUnavailable &&
+      (!this.excelData.length || classifier === null || classifier === '');
 
     this.junkClassifierStatus = classifier;
     this.modalCarfaxStatus = carfaxStatus || '';
@@ -199,13 +215,11 @@ export class DataComparisonComponent {
     this.modalResult = finalResult || '';
     this.showModal = true;
 
-    console.log('VIN lookup:', lookupVin);
-    console.log('VIN unavailable:', this.vinUnavailable);
-    console.log('Modal Carfax Status:', carfaxStatus);
-    console.log('Modal Manheim Status:', manheimStatus);
-    console.log('Modal Final Result:', finalResult);
-    console.log('Junk Classifier Status:', this.junkClassifierStatus);
+    console.log("Carfax VIN:", carfaxVin);
+    console.log("Manheim VIN:", manheimVin);
+    console.log("VIN mismatch:", this.vinMismatch);
   }
+
 
   closeModal() {
     this.showModal = false;
