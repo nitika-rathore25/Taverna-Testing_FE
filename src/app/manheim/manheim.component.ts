@@ -57,7 +57,6 @@ export class ManheimComponent {
             this.response = data;
             this.responseChange.emit(this.response);
             this.loading = false;// Store server response
-            this.toastr.info(`PDF file "${file.name}" uploaded successfully. VIN input disabled.`);
             // handle additional logic if needed
           }
         });

@@ -93,7 +93,7 @@
         <!-- Final Result header and success/error status -->
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800 drop-shadow">Final Result</h2>
-            <ng-container *ngIf="!vinNotInExcel">
+            <ng-container *ngIf="!vinNotInExcel && (junkClassifierStatus !== null && junkClassifierStatus !== '')">
                 <div *ngIf="isJunkClassifierMatch; else notMatched"
                     class="flex items-center space-x-2 text-green-600 font-semibold animate-fadeIn delay-300">
                     <span

@@ -57,7 +57,6 @@ export class CarfaxComponent {
             this.response = data;
             this.responseChange.emit(this.response);
             this.loading = false;
-            this.toastr.info(`PDF file "${file.name}" uploaded successfully. VIN input disabled.`);
           }
         });
     } else {
