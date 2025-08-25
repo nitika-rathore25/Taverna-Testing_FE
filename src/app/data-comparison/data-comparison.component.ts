@@ -224,4 +224,18 @@ export class DataComparisonComponent {
   closeModal() {
     this.showModal = false;
   }
+
+
+  get shouldShowVinInputIndicator(): boolean {
+    // Condition: PDF(s) uploaded AND both Carfax & Manheim responses have no VIN
+    // Assuming you have a way to track PDF file uploads,
+    // For example, check if excelFile is a PDF (adjust accordingly if you differentiate uploads)
+    const uploadedIsPdf = this.excelFile?.name.toLowerCase().endsWith('.pdf') ?? false;
+
+    const carfaxVin = this.getVinFromResponse(this.carfaxResponse);
+    const manheimVin = this.getVinFromResponse(this.manheimResponse);
+
+    return uploadedIsPdf && !carfaxVin && !manheimVin;
+  }
+
 }
