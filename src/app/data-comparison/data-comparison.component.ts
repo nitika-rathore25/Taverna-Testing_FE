@@ -3,6 +3,7 @@ import { HeaderComponent } from '../header/header.component';
 import { CarfaxComponent } from '../carfax/carfax.component';
 import { ManheimComponent } from '../manheim/manheim.component';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -10,7 +11,7 @@ import * as XLSX from 'xlsx';
   templateUrl: './data-comparison.component.html',
   styleUrls: ['./data-comparison.component.css'],
   standalone: true,
-  imports: [CommonModule, HeaderComponent, CarfaxComponent, ManheimComponent],
+  imports: [CommonModule, FormsModule, HeaderComponent, CarfaxComponent, ManheimComponent],
 })
 export class DataComparisonComponent {
   @ViewChild(CarfaxComponent) carfaxComp!: CarfaxComponent;
@@ -23,15 +24,20 @@ export class DataComparisonComponent {
   carfaxResponse: any = null;
   manheimResponse: any = null;
 
+  // Manual VIN input (fallback when Carfax/Manheim don’t return VIN)
+  manualVin: string = '';
+
   // Modal and table columns and flags
   showModal = false;
   modalCarfaxStatus = '';
   modalManheimStatus = '';
   modalResult = '';
   junkClassifierStatus: string | null = null;
-  vinNotInExcel = false; // Flag to control error message & table visibility
+  vinNotInExcel = false;
+  vinUnavailable = false; // new flag for missing VIN
 
-  // Getter for checking if final result matches the junk classifier status (case-insensitive)
+
+  // Getter for junk classifier match (case-insensitive)
   get isJunkClassifierMatch(): boolean {
     if (!this.junkClassifierStatus || !this.modalResult) return false;
     return this.junkClassifierStatus.toLowerCase() === this.modalResult.toLowerCase();
@@ -40,9 +46,9 @@ export class DataComparisonComponent {
   onReset() {
     this.carfaxComp.reset();
     this.manheimComp.reset();
-    this.resetExcel();
     this.carfaxResponse = null;
     this.manheimResponse = null;
+    this.manualVin = ''; // clear manual VIN on reset
   }
 
   onExcelFileSelected(event: Event) {
@@ -54,8 +60,8 @@ export class DataComparisonComponent {
       reader.onload = (e: any) => {
         const data = new Uint8Array(e.target.result);
         const workbook = XLSX.read(data, { type: 'array' });
-        const firstSheetName = workbook.SheetNames[0]; // Get first sheet name string
-        const firstSheet = workbook.Sheets[firstSheetName]; // Index with string
+        const firstSheetName = workbook.SheetNames[0];
+        const firstSheet = workbook.Sheets[firstSheetName];
         this.excelData = XLSX.utils.sheet_to_json(firstSheet, { defval: '' });
 
         console.log('Excel Data Loaded:', this.excelData);
@@ -112,7 +118,7 @@ export class DataComparisonComponent {
       const manheimVin = this.getVinFromResponse(manheimResp);
       return carfaxVin !== null && carfaxVin === manheimVin;
     }
-    return !!(carfaxResp || manheimResp);
+    return !!(carfaxResp || manheimResp || this.manualVin);
   }
 
   getJunkClassifierStatus(vin: string): string | null {
@@ -173,26 +179,32 @@ export class DataComparisonComponent {
 
     const finalResult = this.computeFinalResult(carfaxStatus, manheimStatus);
 
+    // Try to get VIN (Carfax → Manheim → Manual VIN fallback)
     const lookupVin =
       this.getVinFromResponse(this.carfaxResponse) ||
-      this.getVinFromResponse(this.manheimResponse);
+      this.getVinFromResponse(this.manheimResponse) ||
+      (this.manualVin ? this.manualVin.trim().toUpperCase() : null);
 
+    // Check if VIN exists at all
+    this.vinUnavailable = !lookupVin;   // ✅ mark missing VIN case
+
+    // Lookup Excel junk classifier if VIN is available
     const classifier = lookupVin ? this.getJunkClassifierStatus(lookupVin) : null;
 
-    this.vinNotInExcel = !lookupVin || !this.excelData.length || classifier === null || classifier === '';
+    this.vinNotInExcel = !this.vinUnavailable && (!this.excelData.length || classifier === null || classifier === '');
 
     this.junkClassifierStatus = classifier;
-
-    console.log('VIN lookup:', lookupVin);
-    console.log('Modal Carfax Status:', carfaxStatus);
-    console.log('Modal Manheim Status:', manheimStatus);
-    console.log('Modal Final Result:', finalResult);
-    console.log('Junk Classifier Status:', this.junkClassifierStatus);
-
     this.modalCarfaxStatus = carfaxStatus || '';
     this.modalManheimStatus = manheimStatus || '';
     this.modalResult = finalResult || '';
     this.showModal = true;
+
+    console.log('VIN lookup:', lookupVin);
+    console.log('VIN unavailable:', this.vinUnavailable);
+    console.log('Modal Carfax Status:', carfaxStatus);
+    console.log('Modal Manheim Status:', manheimStatus);
+    console.log('Modal Final Result:', finalResult);
+    console.log('Junk Classifier Status:', this.junkClassifierStatus);
   }
 
   closeModal() {
