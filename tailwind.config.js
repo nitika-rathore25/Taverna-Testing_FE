@@ -10,7 +10,7 @@ module.exports = {
                 primaryGradientEnd: '#3A78CA',
             },
             backgroundImage: {
-                'primary-gradient': 'linear-gradient(to right, var(--tw-color-primaryGradientStart), var(--tw-color-primaryGradientEnd))',
+                'primary-gradient': 'linear-gradient(to right, #dff6ff, #e7ffedff)',
             },
 
 
