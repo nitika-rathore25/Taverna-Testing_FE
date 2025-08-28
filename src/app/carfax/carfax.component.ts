@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -14,16 +14,17 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './carfax.component.html',
 })
 export class CarfaxComponent {
+  @Input() showPdfInput: boolean = false;
+
   vin = '';
   pdfFile: File | null = null;
-
   response: any = null;
   loading = false;
   error: string | null = null;
   validationMessage: string | null = null;
 
-  @ViewChild('pdfInput') pdfInputRef!: ElementRef<HTMLInputElement>;
-  @Output() responseChange = new EventEmitter<any>();
+  @ViewChild('pdfInput') pdfInputRef!: ElementRef;
+  @Output() responseChange = new EventEmitter();
 
   objectKeys = Object.keys;
 
@@ -107,7 +108,6 @@ export class CarfaxComponent {
     this.response = null;
     this.error = null;
     this.validationMessage = null;
-
     if (this.pdfInputRef && this.pdfInputRef.nativeElement) {
       this.pdfInputRef.nativeElement.value = '';
     }

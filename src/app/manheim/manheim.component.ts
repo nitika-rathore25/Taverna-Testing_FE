@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -14,22 +14,23 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './manheim.component.html',
 })
 export class ManheimComponent {
+  @Input() showPdfInput: boolean = false;
+
   vin = '';
   pdfFile: File | null = null;
-
   response: any = null;
   loading = false;
   error: string | null = null;
   validationMessage: string | null = null;
-  @ViewChild('pdfInput') pdfInputRef!: ElementRef<HTMLInputElement>;
-  @Output() responseChange = new EventEmitter<any>();
+
+  @ViewChild('pdfInput') pdfInputRef!: ElementRef;
+  @Output() responseChange = new EventEmitter();
 
   objectKeys = Object.keys;
 
   constructor(private http: HttpClient, private toastr: ToastrService) { }
 
   onPdfSelected(event: Event) {
-
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.loading = true;
@@ -39,25 +40,24 @@ export class ManheimComponent {
       this.validationMessage = null;
       this.response = null; // Reset previous response before upload
 
-      // Prepare form data
       const formData = new FormData();
       formData.append('file', file);
       formData.append('type', 'manheim');
 
-      // Upload PDF to the /upload endpoint
-      this.http.post(`${environment.apiBaseUrl}/upload`, formData)
+      this.http
+        .post(`${environment.apiBaseUrl}/upload`, formData)
         .pipe(
-          catchError(err => {
+          catchError((err) => {
             this.toastr.error('Failed to upload PDF file.', 'Error');
+            this.loading = false;
             return of(null);
           })
         )
-        .subscribe(data => {
+        .subscribe((data) => {
           if (data) {
             this.response = data;
             this.responseChange.emit(this.response);
-            this.loading = false;// Store server response
-            // handle additional logic if needed
+            this.loading = false;
           }
         });
     } else {
@@ -65,6 +65,7 @@ export class ManheimComponent {
       this.loading = false;
     }
   }
+
   submitVIN() {
     this.validationMessage = null;
     this.error = null;
@@ -90,7 +91,6 @@ export class ManheimComponent {
         catchError((err) => {
           this.error = err.message ?? 'Network error';
           this.toastr.error(this.error || 'Unknown error', 'Error');
-
           this.loading = false;
           return of(null);
         })

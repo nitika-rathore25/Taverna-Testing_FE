@@ -1,175 +1,565 @@
-<app-header (reset)="onReset()"></app-header>
+<app-header></app-header>
 
-<!-- Info section -->
-<div
-    class="p-6 rounded-2xl shadow-xl text-blue-900 bg-gradient-to-r from-blue-100 via-pink-50 to-yellow-100 relative overflow-hidden animate-fadeIn">
-    <div class="absolute inset-0 bg-white opacity-20 blur-lg pointer-events-none"></div>
+<div class=" bg-white pb-12">
+    <div class=" mx-auto p-4">
+        <!-- Title & Info -->
+        <!-- <h1 class="text-3xl font-bold text-center mb-4">Vehicle Data Comparison Tool</h1>
+        <p class="text-center text-gray-600 mb-8">
+            Compare vehicle data from <span class="font-semibold text-primaryGradientEnd">Carfax</span>
+            and <span class="font-semibold text-primaryGradientStart">Manheim</span> by uploading PDFs or entering VINs
+            manually.<br />
+            Upload an Excel file with VIN classifications to display junk status results.
+        </p> -->
+        <!-- 
+        <h1 class="text-3xl font-bold text-center mb-6">Vehicle Data Comparison Tool</h1>
+        <div *ngIf="activeTab === 'upload'" class="w-full flex flex-col items-center mb-8">
+            <div class="flex items-center justify-center relative">
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
+                        1
+                    </div>
+                    <div
+                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Upload Junk File
+                    </div>
+                </div>
+                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
+                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
+                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
+                </svg>
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
+                        2
+                    </div>
+                    <div
+                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Upload Carfax PDF
+                    </div>
+                </div>
+                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
+                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
+                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
+                </svg>
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
+                        3
+                    </div>
+                    <div
+                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Upload Manheim PDF
+                    </div>
+                </div>
+                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
+                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
+                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
+                </svg>
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
+                        4
+                    </div>
+                    <div
+                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Enter VIN
+                    </div>
+                </div>
+                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
+                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
+                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
+                </svg>
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
+                        5
+                    </div>
+                    <div
+                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Click Final Result
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="activeTab === 'vin'" class="w-full flex flex-col items-center mb-8">
+            <div class="flex items-center justify-center relative">
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
+                        1
+                    </div>
+                    <div
+                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Upload Junk File
+                    </div>
+                </div>
+                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
+                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
+                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
+                </svg>
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
+                        2
+                    </div>
+                    <div
+                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Enter Carfax VIN
+                    </div>
+                </div>
+                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
+                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
+                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
+                </svg>
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
+                        3
+                    </div>
+                    <div
+                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Enter Manheim VIN
+                    </div>
+                </div>
+                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
+                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
+                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
+                </svg>
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
+                        4
+                    </div>
+                    <div
+                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Click Final Result
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <h1 class="text-xl font-bold text-center mb-3 text-gray-700">Vehicle Status Verification Tool</h1>
 
-    <div class="relative z-10">
-        <h2 class="text-2xl font-extrabold mb-4 drop-shadow-sm animate-slideDown">
-            🚗 How to check if a VIN is junk:
-        </h2>
+        <!-- Upload Section -->
+        <div *ngIf="activeTab === 'upload'" class="w-full flex flex-col items-center mb-16">
+            <h1>Follow these steps to check the final result using Upload tab</h1>
+            <div class="flex items-center justify-center relative">
 
-        <ul class="list-decimal list-inside space-y-2 mb-2 flex items-center animate-fadeIn delay-200">
-            <li class="hover:translate-x-1 transition-transform">Enter VIN in the input fields below.</li>
-            <p class="font-bold mx-4 select-none text-pink-600 animate-pulse">OR</p>
-            <li class="hover:translate-x-1 transition-transform">Upload a PDF file containing VIN details.</li>
-        </ul>
+                <!-- Step 1 -->
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                        1
+                    </div>
+                    <div
+                        class="absolute top-full mt-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Upload Junk File
+                    </div>
+                </div>
+                <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
+                    <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
+                    <polygon points="100,20 112,28 100,36" fill="#337ab7" />
+                </svg>
 
-        <p class="mb-1 italic text-gray-800 animate-fadeIn delay-300">
-            To compare these VIN check results with previous ones, upload an Excel data file below.
-        </p>
-    </div>
-</div>
-<!-- Combined Upload + VIN + Actions Card -->
-<div class="flex flex-col items-start gap-3 p-4 bg-white rounded-2xl shadow-lg border border-gray-200 animate-fadeIn">
+                <!-- Step 2 -->
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                        2
+                    </div>
+                    <div
+                        class="absolute top-full mt-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Upload Carfax PDF
+                    </div>
+                </div>
+                <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
+                    <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
+                    <polygon points="100,20 112,28 100,36" fill="#337ab7" />
+                </svg>
 
-    <!-- Row 1: Excel Upload (left aligned) -->
-    <div class="flex items-center gap-4 w-full">
-        <span class="font-semibold text-gray-700">Choose Excel File</span>
-        <span class="text-primaryGradientStart font-bold text-2xl select-none animate-bounce">→</span>
-        <input type="file" #excelInput accept=".xlsx, .xls" (change)="onExcelFileSelected($event)"
-            class="border border-gray-300 rounded-lg p-2 cursor-pointer shadow-sm hover:shadow-md transition" />
-    </div>
+                <!-- Step 3 -->
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                        3
+                    </div>
+                    <div
+                        class="absolute top-full mt-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Upload Manheim PDF
+                    </div>
+                </div>
+                <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
+                    <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
+                    <polygon points="100,20 112,28 100,36" fill="#337ab7" />
+                </svg>
 
-    <!-- Row 2: Manual VIN Input with label left aligned -->
-    <div class="flex items-center gap-3 w-full">
-        <label for="manualVin" class="font-semibold text-gray-700 block min-w-[180px]">
-            Enter VIN (if Carfax/Manheim VIN missing):
-        </label>
-        <input id="manualVin" type="text" [(ngModel)]="manualVin" placeholder="Enter VIN here"
-            class="border-2 rounded-lg p-2 w-64 shadow-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all"
-            [class.border-red-500]="shouldShowVinInputIndicator" [class.animate-pulse]="shouldShowVinInputIndicator" />
-    </div>
+                <!-- Step 4 -->
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                        4
+                    </div>
+                    <div
+                        class="absolute top-full mt-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Enter VIN
+                    </div>
+                </div>
+                <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
+                    <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
+                    <polygon points="100,20 112,28 100,36" fill="#337ab7" />
+                </svg>
 
-    <!-- Row 3: Reset + Final Result Buttons, left aligned -->
-    <div class="flex gap-4 items-center w-full">
-        <button (click)="onReset()" title="reset carfax and manheim entered details"
-            class="text-white bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd transition px-5 py-2 rounded-lg shadow-md hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M4 4v6h6M20 20v-6h-6M4 10a8 8 0 0116 0M20 14a8 8 0 01-16 0" />
-            </svg>
-            Reset All
-        </button>
+                <!-- Step 5 -->
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                        5
+                    </div>
+                    <div
+                        class="absolute top-full mt-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Click Final Result
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <button (click)="onFinalResultClick()"
-            class="text-white bg-gradient-to-r from-green-400 to-green-600 transition px-6 py-2 rounded-lg shadow-md hover:shadow-xl hover:scale-105 flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-            Final Result
-        </button>
-    </div>
+        <!-- VIN Section -->
+        <div *ngIf="activeTab === 'vin'" class="w-full flex flex-col items-center mb-16">
+            <h1>Follow these steps to check the final result using VIN tab</h1>
+            <div class="flex items-center justify-center relative">
 
-</div>
+                <!-- Step 1 -->
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                        1
+                    </div>
+                    <div
+                        class="absolute top-full mt-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Upload Junk File
+                    </div>
+                </div>
+                <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
+                    <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
+                    <polygon points="100,20 112,28 100,36" fill="#337ab7" />
+                </svg>
+
+                <!-- Step 2 -->
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                        2
+                    </div>
+                    <div
+                        class="absolute top-full mt-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Enter Carfax VIN
+                    </div>
+                </div>
+                <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
+                    <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
+                    <polygon points="100,20 112,28 100,36" fill="#337ab7" />
+                </svg>
+
+                <!-- Step 3 -->
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                        3
+                    </div>
+                    <div
+                        class="absolute top-full mt-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Enter Manheim VIN
+                    </div>
+                </div>
+                <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
+                    <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
+                    <polygon points="100,20 112,28 100,36" fill="#337ab7" />
+                </svg>
+
+                <!-- Step 4 -->
+                <div class="relative flex flex-col items-center">
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                        4
+                    </div>
+                    <div
+                        class="absolute top-full mt-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-primaryGradientEnd whitespace-nowrap">
+                        Click Final Result
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
-<!-- VIN check panels -->
-<div class="flex flex-col md:flex-row gap-4 mt-2 animate-fadeIn delay-700 min-h-[calc(100vh-310px)]">
-    <section
-        class="w-full md:w-1/2 p-4 bg-white rounded-xl shadow-lg hover:shadow-2xl transition border border-gray-100 flex-1">
-        <app-carfax (responseChange)="updateCarfaxResponse($event)"></app-carfax>
-    </section>
+        <!-- Excel File Upload -->
+        <div class="flex flex-col md:flex-row items-center gap-4 justify-center mb-4 mt-16">
+            <label for="excelUpload" class="font-semibold text-gray-700 shrink-0">
+                Excel File <span class="text-red-600">*</span>
+            </label>
+            <input id="excelUpload" type="file" accept=".xlsx,.xls" class="border border-gray-300 rounded p-2 w-72"
+                (change)="onExcelSelected($event)" />
+            <span class="text-green-600" *ngIf="excelFile">{{ excelFile.name }}</span>
+        </div>
 
-    <section
-        class="w-full md:w-1/2 p-4 bg-white rounded-xl shadow-lg hover:shadow-2xl transition border border-gray-100 flex-1">
-        <app-manheim (responseChange)="updateManheimResponse($event)"></app-manheim>
-    </section>
-</div>
+        <!-- Tabs -->
+        <div class="flex justify-center gap-8 border-b border-gray-300 mb-6">
+            <button class="px-6 py-1 font-semibold text-base flex items-center gap-2" [ngClass]="{
+          'text-primaryGradientEnd border-b-4 border-primaryGradientEnd': activeTab === 'upload',
+          'text-gray-500 hover:text-primaryGradientEnd': activeTab !== 'upload'
+        }" (click)="switchTab('upload')">
+                <i class="fas fa-file-upload"></i>Check by Upload PDF
+            </button>
+            <button class="px-6 py-2 font-semibold text-base flex items-center gap-2" [ngClass]="{
+          'text-primaryGradientEnd border-b-4 border-primaryGradientEnd': activeTab === 'vin',
+          'text-gray-500 hover:text-primaryGradientEnd': activeTab !== 'vin'
+        }" (click)="switchTab('vin')">
+                <i class="fas fa-id-card"></i>Check by VIN
+            </button>
+        </div>
 
-<!-- Modal for Results -->
-<div *ngIf="showModal"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 animate-fadeIn">
-    <div
-        class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-xl relative transform transition-all scale-95 animate-scaleUp">
 
-        <!-- Close icon -->
-        <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-2xl hover:rotate-90 transition"
-            (click)="closeModal()" aria-label="Close modal">
-            &times;
-        </button>
 
-        <!-- Final Result header -->
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold text-gray-800 drop-shadow">Final Result</h2>
-            <ng-container
-                *ngIf="!vinMismatch && !vinNotInExcel && (junkClassifierStatus !== null && junkClassifierStatus !== '')">
-                <div *ngIf="isJunkClassifierMatch; else notMatched"
-                    class="flex items-center space-x-2 text-green-600 font-semibold animate-fadeIn delay-300">
+        <!-- Cards -->
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Carfax Card -->
+            <div class="flex-1 p-6 bg-white rounded-lg shadow border border-gray-200">
+                <div class="flex items-center space-x-2 mb-4">
                     <span
-                        class="flex items-center justify-center w-8 h-8 rounded-full bg-green-600 text-white text-lg shadow-md select-none">
-                        &#10003;
+                        class="bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd px-2 py-1 rounded-full text-white">
+                        <i class="fas fa-car"></i>
                     </span>
-                    <span>Success: Status matched</span>
+                    <h2 class="text-lg font-bold text-primaryGradientStart">Carfax</h2>
                 </div>
 
-                <ng-template #notMatched>
-                    <div class="flex items-center space-x-2 text-red-600 font-semibold animate-fadeIn delay-300">
-                        <span
-                            class="flex items-center justify-center w-7 h-7 rounded-full bg-red-600 text-white shadow-md select-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M18.364 5.636l-12.728 12.728M5.636 5.636l12.728 12.728" />
-                            </svg>
-                        </span>
-                        <span>Status not matched</span>
+                <!-- Upload Tab content -->
+                <ng-container *ngIf="activeTab === 'upload'">
+                    <label class="block font-semibold mb-1">Carfax PDF Upload <span
+                            class="text-red-600">*</span></label>
+                    <input type="file" #carfaxPdfInput accept="application/pdf"
+                        class="border border-gray-300 rounded p-2 w-full" (change)="onCarfaxPdfSelected($event)" />
+                    <p class="text-green-600 mt-1" *ngIf="carfaxPdfFile_upload">{{ carfaxPdfFile_upload.name }}</p>
+                    <div class="flex items-center gap-2 mt-2" *ngIf="loadingCarfax_upload">
+                        <div class="loader"></div>
+                        <span class="text-primaryGradientEnd text-sm font-medium">Processing Carfax...</span>
                     </div>
-                </ng-template>
-            </ng-container>
-        </div>
+                    <div *ngIf="carfaxResponse_upload" class="mt-4 overflow-auto max-h-48">
+                        <table class="min-w-full table-fixed border-collapse border border-gray-300">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th *ngFor="let key of objectKeys(carfaxResponse_upload)"
+                                        class="border p-1  text-gray-600">{{ key }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr>
+                                    <td *ngFor="let key of objectKeys(carfaxResponse_upload)"
+                                        class="border p-1  text-gray-800 break-words">{{
+                                        formatValue(carfaxResponse_upload[key]) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-container>
 
-        <!-- VIN Mismatch Message -->
-        <div *ngIf="vinMismatch" class="my-8 text-center animate-pulse">
-            <span class="text-red-600 text-lg font-semibold">
-                ❌ Both VINs are different. Cannot compare with Excel.
-            </span>
-        </div>
+                <!-- VIN tab content -->
+                <ng-container *ngIf="activeTab === 'vin'">
+                    <label class="block font-semibold mb-1">Carfax VIN <span class="text-red-600">*</span></label>
+                    <div class="relative w-full flex items-center">
+                        <input type="text" class="border border-gray-300 rounded p-2 w-full pr-20"
+                            [(ngModel)]="carfaxVin_vin" autocomplete="off" (keydown.enter)="submitVin('carfax')"
+                            placeholder="Enter Carfax VIN" />
+                        <button type="button"
+                            class="absolute right-1 top-1/2 transform -translate-y-1/2 flex items-center gap-2 px-3 py-1 bg-primaryGradientEnd text-white font-semibold rounded disabled:opacity-50"
+                            [disabled]="!carfaxVin_vin.trim()" (click)="submitVin('carfax')">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit
+                        </button>
+                    </div>
 
-        <!-- VIN Missing Message -->
-        <div *ngIf="vinUnavailable && !vinMismatch" class="my-8 text-center animate-pulse">
-            <span class="text-red-600 text-lg font-semibold">
-                ❌ VIN not available for comparison, please enter VIN.
-            </span>
-        </div>
-
-        <!-- VIN not in Excel Message -->
-        <div *ngIf="!vinUnavailable && !vinMismatch && vinNotInExcel && showFinalResultButton"
-            class="my-8 text-center animate-pulse">
-            <span class="text-red-600 text-lg font-semibold">
-                ❌ Provided VIN is not present in the file
-            </span>
-        </div>
-
-        <!-- Result Table + Junk Classifier (only if no mismatch and VIN available) -->
-        <ng-container *ngIf="carfaxResponse && manheimResponse">
-            <table
-                class="table-auto w-full text-center mb-6 shadow-md rounded-lg overflow-hidden animate-fadeIn delay-500">
-                <thead>
-                    <tr class="bg-gradient-to-r from-blue-200 to-blue-100">
-                        <th class="p-2">Carfax Status</th>
-                        <th class="p-2">Manheim Status</th>
-                        <th class="p-2">Final Result</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="hover:bg-gray-50 transition">
-                        <td>{{ modalCarfaxStatus }}</td>
-                        <td>{{ modalManheimStatus }}</td>
-                        <td class="font-bold text-blue-700">{{ modalResult }}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div *ngIf="!vinMismatch && junkClassifierStatus !== null && junkClassifierStatus !== ''"
-                class="mt-6 pt-4 border-t border-gray-200 flex flex-col items-center space-y-2 text-center animate-fadeIn delay-700">
-                <span class="text-lg font-semibold">Junk Classifier Status from Uploaded Excel File:</span>
-                <span class="text-2xl font-bold text-pink-600 drop-shadow">{{ junkClassifierStatus }}</span>
+                    <div class="flex items-center gap-2 mt-2" *ngIf="loadingCarfax_vin">
+                        <div class="loader"></div>
+                        <span class="text-primaryGradientEnd text-sm font-medium">Processing Carfax...</span>
+                    </div>
+                    <div *ngIf="carfaxResponse_vin" class="mt-4 overflow-auto max-h-48">
+                        <table class="min-w-full table-fixed border-collapse border border-gray-300">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th *ngFor="let key of objectKeys(carfaxResponse_vin)"
+                                        class="border p-1  text-gray-600">{{ key }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr>
+                                    <td *ngFor="let key of objectKeys(carfaxResponse_vin)"
+                                        class="border p-1  text-gray-800 break-words">{{
+                                        formatValue(carfaxResponse_vin[key]) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-container>
             </div>
-        </ng-container>
+
+            <!-- Manheim Card -->
+            <div class="flex-1 p-6 bg-white rounded-lg shadow border border-gray-200">
+                <div class="flex items-center space-x-2 mb-4">
+                    <span
+                        class="bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd px-2 py-1 rounded-full text-white">
+                        <i class="fas fa-warehouse"></i>
+                    </span>
+                    <h2 class="text-lg font-bold text-primaryGradientStart">Manheim</h2>
+                </div>
+
+                <!-- Upload Tab content -->
+                <ng-container *ngIf="activeTab === 'upload'">
+                    <label class="block font-semibold mb-1">Manheim PDF Upload <span
+                            class="text-red-600">*</span></label>
+                    <input type="file" #manheimPdfInput accept="application/pdf"
+                        class="border border-gray-300 rounded p-2 w-full" (change)="onManheimPdfSelected($event)" />
+                    <p class="text-green-600 mt-1" *ngIf="manheimPdfFile_upload">{{ manheimPdfFile_upload.name }}</p>
+                    <div class="flex items-center gap-2 mt-2" *ngIf="loadingManheim_upload">
+                        <div class="loader"></div>
+                        <span class="text-primaryGradientEnd text-sm font-medium">Processing Manheim...</span>
+                    </div>
+                    <div *ngIf="manheimResponse_upload" class="mt-4 overflow-auto max-h-48">
+                        <table class="min-w-full table-fixed border-collapse border border-gray-300">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th *ngFor="let key of objectKeys(manheimResponse_upload)"
+                                        class="border p-1  text-gray-600">{{ key }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr>
+                                    <td *ngFor="let key of objectKeys(manheimResponse_upload)"
+                                        class="border p-1  text-gray-800 break-words">{{
+                                        formatValue(manheimResponse_upload[key]) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-container>
+
+                <!-- VIN tab content -->
+                <ng-container *ngIf="activeTab === 'vin'">
+                    <label class="block font-semibold mb-1">Manheim VIN <span class="text-red-600">*</span></label>
+                    <div class="relative w-full flex items-center">
+                        <input type="text" class="border border-gray-300 rounded p-2 w-full pr-20"
+                            [(ngModel)]="manheimVin_vin" autocomplete="off" (keydown.enter)="submitVin('manheim')"
+                            placeholder="Enter Manheim VIN" />
+                        <button type="button"
+                            class="absolute right-1 top-1/2 transform -translate-y-1/2 flex items-center gap-2 px-3 py-1 bg-primaryGradientEnd text-white font-semibold rounded disabled:opacity-50"
+                            [disabled]="!manheimVin_vin.trim()" (click)="submitVin('manheim')">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-2 mt-2" *ngIf="loadingManheim_vin">
+                        <div class="loader"></div>
+                        <span class="text-primaryGradientEnd text-sm font-medium">Processing Manheim...</span>
+                    </div>
+                    <div *ngIf="manheimResponse_vin" class="mt-4 overflow-auto max-h-48">
+                        <table class="min-w-full table-fixed border-collapse border border-gray-300">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th *ngFor="let key of objectKeys(manheimResponse_vin)"
+                                        class="border p-1  text-gray-600">{{ key }}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr>
+                                    <td *ngFor="let key of objectKeys(manheimResponse_vin)"
+                                        class="border p-1  text-gray-800 break-words">{{
+                                        formatValue(manheimResponse_vin[key]) }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <!-- VIN box below Upload tab only if needed -->
+        <div *ngIf="activeTab === 'upload' && carfaxPdfFile_upload && manheimPdfFile_upload && !getVinFromResponse(carfaxResponse_upload) && !getVinFromResponse(manheimResponse_upload)"
+            class="flex flex-col md:flex-row items-center gap-4 my-4 justify-center">
+            <label class="font-semibold text-gray-700">
+                Enter VIN (missing in PDFs) <span class="text-red-600">*</span>
+            </label>
+            <input type="text" class="border border-gray-300 rounded p-2 w-80 text-center"
+                [(ngModel)]="manualVin_upload" autocomplete="off" />
+        </div>
+
+        <!-- Final Result Button -->
+        <div class="flex justify-center mt-8 gap-2">
+            <!-- Unified Reset Button -->
+            <button
+                class="px-3 py-2 rounded font-semibold shadow text-white bg-gradient-to-r from-gray-400 to-gray-600 hover:from-gray-500 hover:to-gray-700 disabled:opacity-60"
+                (click)="onCommonReset()"
+                [disabled]="loadingCarfax_upload || loadingManheim_upload || loadingCarfax_vin || loadingManheim_vin">
+                <i class="fa-solid fa-rotate-left mr-2"></i>
+                Reset
+            </button>
+            <button
+                class="px-3 py-2 rounded font-semibold shadow text-white bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:opacity-60"
+                [disabled]="!canShowButton() || loadingCarfax_upload || loadingManheim_upload || loadingCarfax_vin || loadingManheim_vin"
+                (click)="onShow()">
+                <i class="fa-solid fa-circle-check mr-2"></i>
+                Final Result
+            </button>
+
+        </div>
+
+        <!-- Modal -->
+        <div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-8 max-w-2xl w-full relative">
+                <button class="absolute top-2 right-2 text-2xl hover:text-gray-700" (click)="closeModal()">
+                    &times;
+                </button>
+                <h3 class="text-center text-2xl font-bold mb-6">Final Result</h3>
+                <div *ngIf="vinMismatch" class="text-red-600 font-semibold text-center mb-3">
+                    ❌ Both VINs are different. Cannot compare.
+                </div>
+                <div *ngIf="vinUnavailable && !vinMismatch" class="text-red-600 font-semibold text-center mb-3">
+                    ❌ VIN unavailable. Please enter VIN.
+                </div>
+                <div *ngIf="vinNotInExcel && !vinUnavailable && !vinMismatch"
+                    class="text-red-600 font-semibold text-center mb-3">
+                    ❌ VIN not found in Excel data.
+                </div>
+                <div class="flex justify-center mb-5">
+                    <span *ngIf="isStatusMatched()"
+                        class="bg-green-100 text-green-600 rounded-full py-1 px-4 font-semibold flex items-center gap-2">
+                        <i class="fas fa-check"></i>
+                        Status matched
+                    </span>
+                    <span *ngIf="!isStatusMatched()"
+                        class="bg-red-100 text-red-600 rounded-full py-1 px-4 font-semibold flex items-center gap-2">
+                        <i class="fas fa-times"></i>
+                        Status unmatched
+                    </span>
+                </div>
+                <table class="w-full border-collapse border border-gray-300 mb-5">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="border border-gray-300 py-2 px-4">Carfax Status</th>
+                            <th class="border border-gray-300 py-2 px-4">Manheim Status</th>
+                            <th class="border border-gray-300 py-2 px-4">Final Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td class="border border-gray-300 py-2 px-4">{{ modalCarfax }}</td>
+                            <td class="border border-gray-300 py-2 px-4">{{ modalManheim }}</td>
+                            <td class="border border-gray-300 py-2 px-4 font-bold text-blue-700">{{ modalResult }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-center font-semibold text-pink-600" *ngIf="junkClassifier">
+                    Junk Classifier: <span class="font-bold">{{ junkClassifier }}</span>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
