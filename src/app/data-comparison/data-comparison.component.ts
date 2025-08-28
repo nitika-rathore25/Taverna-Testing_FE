@@ -362,4 +362,16 @@ export class DataComparisonComponent {
   }
 
 
+
+
+  get allStepsCompletedForPdf(): boolean {
+    return !!this.excelFile && !!this.carfaxResponse_upload && !!this.manheimResponse_upload && !!this.manualVin_upload;
+  }
+
+  get allStepsCompletedForVin(): boolean {
+    return !!this.excelFile && !!this.carfaxResponse_vin && !!this.manheimResponse_vin;
+  }
+
+
+
 }

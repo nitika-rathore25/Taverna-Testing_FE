@@ -3,152 +3,17 @@
 <div class=" bg-white pb-12">
     <div class=" mx-auto p-4">
         <!-- Title & Info -->
-        <!-- <h1 class="text-3xl font-bold text-center mb-4">Vehicle Data Comparison Tool</h1>
-        <p class="text-center text-gray-600 mb-8">
-            Compare vehicle data from <span class="font-semibold text-primaryGradientEnd">Carfax</span>
-            and <span class="font-semibold text-primaryGradientStart">Manheim</span> by uploading PDFs or entering VINs
-            manually.<br />
-            Upload an Excel file with VIN classifications to display junk status results.
-        </p> -->
-        <!-- 
-        <h1 class="text-3xl font-bold text-center mb-6">Vehicle Data Comparison Tool</h1>
-        <div *ngIf="activeTab === 'upload'" class="w-full flex flex-col items-center mb-8">
-            <div class="flex items-center justify-center relative">
-                <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
-                        1
-                    </div>
-                    <div
-                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
-                        Upload Junk File
-                    </div>
-                </div>
-                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
-                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
-                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
-                </svg>
-                <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
-                        2
-                    </div>
-                    <div
-                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
-                        Upload Carfax PDF
-                    </div>
-                </div>
-                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
-                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
-                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
-                </svg>
-                <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
-                        3
-                    </div>
-                    <div
-                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
-                        Upload Manheim PDF
-                    </div>
-                </div>
-                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
-                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
-                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
-                </svg>
-                <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
-                        4
-                    </div>
-                    <div
-                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
-                        Enter VIN
-                    </div>
-                </div>
-                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
-                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
-                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
-                </svg>
-                <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
-                        5
-                    </div>
-                    <div
-                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
-                        Click Final Result
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div *ngIf="activeTab === 'vin'" class="w-full flex flex-col items-center mb-8">
-            <div class="flex items-center justify-center relative">
-                <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
-                        1
-                    </div>
-                    <div
-                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
-                        Upload Junk File
-                    </div>
-                </div>
-                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
-                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
-                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
-                </svg>
-                <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
-                        2
-                    </div>
-                    <div
-                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
-                        Enter Carfax VIN
-                    </div>
-                </div>
-                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
-                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
-                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
-                </svg>
-                <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
-                        3
-                    </div>
-                    <div
-                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
-                        Enter Manheim VIN
-                    </div>
-                </div>
-                <svg class="h-14 w-14 flex-shrink-0" viewBox="0 0 56 56">
-                    <line x1="0" y1="28" x2="46" y2="28" stroke="#337ab7" stroke-width="4" />
-                    <polygon points="46,20 56,28 46,36" fill="#337ab7" />
-                </svg>
-                <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-14 h-14 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-2xl">
-                        4
-                    </div>
-                    <div
-                        class="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-sm font-semibold text-primaryGradientEnd whitespace-nowrap">
-                        Click Final Result
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <h1 class="text-xl font-bold text-center mb-3 text-gray-700">Vehicle Status Verification Tool</h1>
 
-        <!-- Upload Section -->
+        <!-- Upload Section stepper-->
         <div *ngIf="activeTab === 'upload'" class="w-full flex flex-col items-center mb-16">
             <h1>Follow these steps to check the final result using Upload tab</h1>
             <div class="flex items-center justify-center relative">
 
                 <!-- Step 1 -->
                 <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-lg"
+                        [ngClass]="excelFile ? 'bg-gradient-to-r from-green-500 to-green-300' : 'bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd'">
                         1
                     </div>
                     <div
@@ -156,6 +21,7 @@
                         Upload Junk File
                     </div>
                 </div>
+
                 <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
                     <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
                     <polygon points="100,20 112,28 100,36" fill="#337ab7" />
@@ -163,8 +29,8 @@
 
                 <!-- Step 2 -->
                 <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-lg"
+                        [ngClass]="carfaxResponse_upload ? 'bg-gradient-to-r from-green-500 to-green-300' : 'bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd'">
                         2
                     </div>
                     <div
@@ -172,6 +38,7 @@
                         Upload Carfax PDF
                     </div>
                 </div>
+
                 <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
                     <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
                     <polygon points="100,20 112,28 100,36" fill="#337ab7" />
@@ -179,8 +46,8 @@
 
                 <!-- Step 3 -->
                 <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-lg"
+                        [ngClass]="manheimResponse_upload ? 'bg-gradient-to-r from-green-500 to-green-300' : 'bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd'">
                         3
                     </div>
                     <div
@@ -188,6 +55,7 @@
                         Upload Manheim PDF
                     </div>
                 </div>
+
                 <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
                     <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
                     <polygon points="100,20 112,28 100,36" fill="#337ab7" />
@@ -195,8 +63,8 @@
 
                 <!-- Step 4 -->
                 <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-lg"
+                        [ngClass]="manualVin_upload ? 'bg-gradient-to-r from-green-500 to-green-300' : 'bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd'">
                         4
                     </div>
                     <div
@@ -204,6 +72,7 @@
                         Enter VIN
                     </div>
                 </div>
+
                 <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
                     <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
                     <polygon points="100,20 112,28 100,36" fill="#337ab7" />
@@ -211,8 +80,8 @@
 
                 <!-- Step 5 -->
                 <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-lg"
+                        [ngClass]="allStepsCompletedForPdf && showModal == false ? 'bg-gradient-to-r from-green-500 to-green-300 animate-pulse transition-all duration-500' : 'bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd'">
                         5
                     </div>
                     <div
@@ -220,18 +89,21 @@
                         Click Final Result
                     </div>
                 </div>
+
+
+
             </div>
         </div>
 
-        <!-- VIN Section -->
+        <!-- VIN Section stepper-->
         <div *ngIf="activeTab === 'vin'" class="w-full flex flex-col items-center mb-16">
             <h1>Follow these steps to check the final result using VIN tab</h1>
             <div class="flex items-center justify-center relative">
 
                 <!-- Step 1 -->
                 <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-lg"
+                        [ngClass]="excelFile ? 'bg-gradient-to-r from-green-500 to-green-300' : 'bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd'">
                         1
                     </div>
                     <div
@@ -246,8 +118,8 @@
 
                 <!-- Step 2 -->
                 <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-lg"
+                        [ngClass]="carfaxResponse_vin ? 'bg-gradient-to-r from-green-400 to-green-600' : 'bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd'">
                         2
                     </div>
                     <div
@@ -255,6 +127,7 @@
                         Enter Carfax VIN
                     </div>
                 </div>
+
                 <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
                     <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
                     <polygon points="100,20 112,28 100,36" fill="#337ab7" />
@@ -262,8 +135,8 @@
 
                 <!-- Step 3 -->
                 <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-lg"
+                        [ngClass]="manheimResponse_vin ? 'bg-gradient-to-r from-green-400 to-green-600' : 'bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd'">
                         3
                     </div>
                     <div
@@ -271,6 +144,7 @@
                         Enter Manheim VIN
                     </div>
                 </div>
+
                 <svg class="h-10 w-28 flex-shrink-0" viewBox="0 0 112 56">
                     <line x1="0" y1="28" x2="100" y2="28" stroke="#337ab7" stroke-width="3" />
                     <polygon points="100,20 112,28 100,36" fill="#337ab7" />
@@ -278,15 +152,16 @@
 
                 <!-- Step 4 -->
                 <div class="relative flex flex-col items-center">
-                    <div
-                        class="w-8 h-8 rounded-full bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd flex items-center justify-center font-bold text-white text-lg">
-                        4
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-lg"
+                        [ngClass]="allStepsCompletedForVin && showModal == false ? 'bg-gradient-to-r from-green-500 to-green-300 animate-pulse transition-all duration-500' : 'bg-gradient-to-r from-primaryGradientStart to-primaryGradientEnd'">
+                        5
                     </div>
                     <div
                         class="absolute top-full mt-4 left-1/2 -translate-x-1/2 text-xs font-semibold text-primaryGradientEnd whitespace-nowrap">
                         Click Final Result
                     </div>
                 </div>
+
             </div>
         </div>
 
